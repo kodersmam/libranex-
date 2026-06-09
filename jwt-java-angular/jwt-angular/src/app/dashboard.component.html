@@ -1,0 +1,17 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <header>
+    <h1>Witaj w aplikacji!</h1>
+    <button (click)="logout()" class="logout-btn">Wyloguj się</button>
+  </header>
+
+  <div class="card">
+    <h2>Chroniona zawartość</h2>
+    <p><strong>Odpowiedź z backendu:</strong></p>
+    <p class="message">{{ message }}</p>
+
+  </div>
+
+  <p>Jesteś zalogowany tokenem JWT ✅</p>
+  <p class="witaj"> matii {{ username }}</p>
+</div>
