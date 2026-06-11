@@ -1,5 +1,6 @@
 package com.example.jwt.service;
 
+import com.example.jwt.exception.UserAlreadyExistsException;
 import com.example.jwt.model.User;
 import com.example.jwt.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
@@ -21,7 +22,7 @@ public class UserService {
 
     public User registerUser(String username, String rawPassword) {
         if (userRepository.findByUsername(username).isPresent()) {
-            throw new RuntimeException("User exists");
+            throw new UserAlreadyExistsException(username);
         }
 
         User user = new User();

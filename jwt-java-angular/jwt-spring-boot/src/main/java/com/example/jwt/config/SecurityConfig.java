@@ -31,8 +31,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        // Publiczne endpointy
-                        .requestMatchers("/api/auth/**").permitAll()
+                        // Publiczne endpointy auth
+                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
 
                         // Swagger / OpenAPI – pozwól bez logowania
                         .requestMatchers("/swagger-ui/**",

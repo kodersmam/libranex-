@@ -1,36 +1,236 @@
-<div class="auth-wrapper">
-  <div class="auth-card">
-    <h2>Logowanie</h2>
+<div class="auth-page">
+  <div class="auth-bg" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
 
-    <div *ngIf="error" class="error-message">{{ error }}</div>
+  <div class="auth-shell">
+    <aside class="auth-hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2a5 5 0 0 1 5 5v1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v1h6V7a3 3 0 0 0-3-3z"
+              fill="currentColor" />
+          </svg>
+          <span>Bezpieczny dostęp</span>
+        </div>
 
-    <form (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <input
-          type="text"
-          [(ngModel)]="username"
-          name="username"
-          placeholder="Nazwa użytkownika"
-          required />
+        <h1>Witaj ponownie</h1>
+        <p>Zaloguj się do swojego konta i zarządzaj biblioteką w jednym miejscu.</p>
+
+        <ul class="hero-features">
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            Uwierzytelnianie JWT
+          </li>
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            Panel biblioteki
+          </li>
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            Szybki i prosty dostęp
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <section class="auth-card">
+      <div class="card-header">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2a5 5 0 0 1 5 5v1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V7a5 5 0 0 1 5-5z"
+              fill="currentColor" />
+          </svg>
+        </div>
+        <h2>Logowanie</h2>
+        <p>Wprowadź dane, aby kontynuować</p>
       </div>
 
-      <div class="form-group">
-        <input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          placeholder="Hasło"
-          required />
+      @if (error) {
+        <div class="error-message" role="alert">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
+          <span>{{ error }}</span>
+        </div>
+      }
+
+      <form class="auth-form" (ngSubmit)="onLogin()">
+        <label class="field">
+          <span class="field-label">Nazwa użytkownika</span>
+          <span class="input-wrap">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              placeholder="np. jan.kowalski"
+              autocomplete="username"
+              required />
+          </span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Hasło</span>
+          <span class="input-wrap">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </span>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required />
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Ukryj hasło' : 'Pokaż hasło'">
+              @if (showPassword) {
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M3 3l18 18M10.584 10.587a2 2 0 0 0 2.828 2.83M9.363 5.365A9.06 9.06 0 0 1 12 5c4.5 0 8.22 3.06 9.5 7.2a9.7 9.7 0 0 1-2.12 3.32M6.1 6.1A9.7 9.7 0 0 0 3.5 12c1.28 4.14 5 7.2 9.5 7.2a9.06 9.06 0 0 0 2.635-.385"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              } @else {
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              }
+            </button>
+          </span>
+        </label>
+
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          @if (loading) {
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Logowanie...</span>
+          } @else {
+            <span>Zaloguj się</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          }
+        </button>
+      </form>
+
+      <div class="divider">
+        <span>lub kontynuuj przez</span>
       </div>
 
-      <button type="submit" [disabled]="loading" class="btn btn-primary">
-        {{ loading ? 'Logowanie...' : 'Zaloguj się' }}
-      </button>
-    </form>
+      <div class="social-login">
+        <button type="button" class="social-btn" title="Google (wkrótce)" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+              fill="#4285F4" />
+            <path
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              fill="#34A853" />
+            <path
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              fill="#FBBC05" />
+            <path
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              fill="#EA4335" />
+          </svg>
+        </button>
+        <button type="button" class="social-btn" title="GitHub (wkrótce)" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.742 0 .267.18.578.688.48A10.013 10.013 0 0022 12c0-5.523-4.477-10-10-10z"
+              fill="currentColor" />
+          </svg>
+        </button>
+        <button type="button" class="social-btn" title="Microsoft (wkrótce)" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 3h8.5v8.5H3V3z" fill="#F25022" />
+            <path d="M12.5 3H21v8.5h-8.5V3z" fill="#7FBA00" />
+            <path d="M3 12.5h8.5V21H3v-8.5z" fill="#00A4EF" />
+            <path d="M12.5 12.5H21V21h-8.5v-8.5z" fill="#FFB900" />
+          </svg>
+        </button>
+      </div>
 
-    <div class="register-link">
-      Nie masz konta?
-      <a routerLink="/register">Zarejestruj się</a>
-    </div>
+      <p class="register-link">
+        Nie masz konta?
+        <a routerLink="/register">Zarejestruj się</a>
+      </p>
+    </section>
   </div>
 </div>

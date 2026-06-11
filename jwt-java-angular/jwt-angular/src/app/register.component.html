@@ -1,34 +1,146 @@
-<!-- src/app/register/register.component.html -->
-<div class="auth-container">
-  <h2>Rejestracja</h2>
+<div class="auth-page">
+  <div class="auth-bg" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
 
-  <div *ngIf="success" class="success">{{ success }}</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
+  <div class="auth-shell">
+    <aside class="auth-hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <span>Nowe konto</span>
+        </div>
 
-  <form (ngSubmit)="onRegister()">
-    <input
-      type="text"
-      [(ngModel)]="username"
-      name="username"
-      placeholder="Nazwa użytkownika"
-      required />
+        <h1>Dołącz do biblioteki</h1>
+        <p>Utwórz konto w kilka sekund i uzyskaj dostęp do panelu użytkownika.</p>
 
-    <input
-      type="password"
-      [(ngModel)]="password"
-      name="password"
-      placeholder="Hasło"
-      required />
+        <ul class="hero-features">
+          <li>
+            <span class="feature-icon">✓</span>
+            Szybka rejestracja
+          </li>
+          <li>
+            <span class="feature-icon">✓</span>
+            Bezpieczne hasło
+          </li>
+          <li>
+            <span class="feature-icon">✓</span>
+            Natychmiastowy dostęp po logowaniu
+          </li>
+        </ul>
+      </div>
+    </aside>
 
-    <input
-      type="password"
-      [(ngModel)]="confirmPassword"
-      name="confirmPassword"
-      placeholder="Powtórz hasło"
-      required />
+    <section class="auth-card">
+      <div class="card-header">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              fill="currentColor" />
+          </svg>
+        </div>
+        <h2>Rejestracja</h2>
+        <p>Wypełnij formularz, aby utworzyć konto</p>
+      </div>
 
-    <button type="submit">Zarejestruj się</button>
-  </form>
+      @if (success) {
+        <div class="success-message" role="status">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <span>{{ success }}</span>
+        </div>
+      }
 
-  <p>Masz już konto? <a routerLink="/login">Zaloguj się</a></p>
+      @if (error) {
+        <div class="error-message" [class.error-message--exists]="userAlreadyExists" role="alert">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
+          <div class="error-content">
+            <span>{{ error }}</span>
+            @if (userAlreadyExists) {
+              <a routerLink="/login" class="error-action">Przejdź do logowania</a>
+            }
+          </div>
+        </div>
+      }
+
+      <form class="auth-form" (ngSubmit)="onRegister()">
+        <label class="field">
+          <span class="field-label">Nazwa użytkownika</span>
+          <input
+            type="text"
+            [(ngModel)]="username"
+            name="username"
+            placeholder="np. jan.kowalski"
+            autocomplete="username"
+            required />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Hasło</span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="new-password"
+            required />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Powtórz hasło</span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="••••••••"
+            autocomplete="new-password"
+            required />
+        </label>
+
+        <label class="show-password">
+          <input type="checkbox" [(ngModel)]="showPassword" name="showPassword" />
+          Pokaż hasła
+        </label>
+
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          @if (loading) {
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Tworzenie konta...</span>
+          } @else {
+            <span>Zarejestruj się</span>
+          }
+        </button>
+      </form>
+
+      <p class="login-link">
+        Masz już konto?
+        <a routerLink="/login">Zaloguj się</a>
+      </p>
+    </section>
+  </div>
 </div>
