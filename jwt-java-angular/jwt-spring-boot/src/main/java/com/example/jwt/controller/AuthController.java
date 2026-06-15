@@ -68,7 +68,7 @@ public class AuthController {
 
         String role = userDetails.getAuthorities().stream()
                 .findFirst()
-                .map(Object::toString)
+                .map(authority -> authority.getAuthority())
                 .orElse("ROLE_USER");
 
         return ResponseEntity.ok(Map.of(
